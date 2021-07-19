@@ -19,6 +19,10 @@ versions.constraintlayout = "2.0.4"
 versions.junit = "4.13.2"
 versions.extJunit = "1.1.3"
 versions.espresso = "3.4.0"
+versions.hilt = "2.37"
+versions.retrofit = "2.9.0"
+versions.coroutines = "1.5.1"
+versions.room = "2.3.0"
 ext.versions = versions
 
 def deps = [:]
@@ -35,5 +39,27 @@ tests.junit = "junit:junit:$versions.junit"
 tests.extJunit = "androidx.test.ext:junit:$versions.extJunit"
 tests.espresso = "androidx.test.espresso:espresso-core:$versions.espresso"
 deps.tests = tests
+
+def hilt = [:]
+hilt.android = "com.google.dagger:hilt-android:$versions.hilt"
+hilt.plugin = "com.google.dagger:hilt-android-gradle-plugin:$versions.hilt"
+hilt.compiler = "com.google.dagger:hilt-android-compiler:$versions.hilt"
+deps.hilt = hilt
+
+def retrofit = [:]
+retrofit.runtime = "com.squareup.retrofit2:retrofit:$versions.retrofit"
+retrofit.gson = "com.squareup.retrofit2:converter-gson:$versions.retrofit"
+deps.retrofit = retrofit
+
+def coroutines = [:]
+coroutines.core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.coroutines"
+coroutines.android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.coroutines"
+deps.coroutines = coroutines
+
+def room = [:]
+room.runtime = "androidx.room:room-runtime:$versions.room"
+room.ktx = "androidx.room:room-ktx:$versions.room"
+room.compiler = "androidx.room:room-compiler:$versions.room"
+deps.room = room
 
 ext.deps = deps

@@ -5,10 +5,18 @@ pluginManagement {
         google()
         mavenCentral()
     }
+    resolutionStrategy {
+        eachPlugin {
+            if (requested.id.id == 'dagger.hilt.android.plugin') {
+                useModule(deps.hilt.plugin)
+            }
+        }
+    }
     plugins {
         id 'com.android.application' version versions.AGP
         id 'com.android.library' version versions.AGP
         id 'org.jetbrains.kotlin.android' version versions.kotlin
+        id 'org.jetbrains.kotlin.kapt' version versions.kotlin
     }
 }
 dependencyResolutionManagement {
@@ -20,3 +28,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Places"
 include ':presentation'
+include ':data'
