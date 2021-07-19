@@ -1,5 +1,6 @@
 package com.givekesh.places.data.di.module
 
+import com.givekesh.places.data.source.local.PlacesDao
 import com.givekesh.places.data.source.remote.NetworkApi
 import com.givekesh.places.data.source.repository.PlacesRepository
 import dagger.Module
@@ -13,5 +14,7 @@ import javax.inject.Singleton
 object RepositoryModule {
     @Singleton
     @Provides
-    fun providePlacesRepository(networkApi: NetworkApi) = PlacesRepository(networkApi)
+    fun providePlacesRepository(
+        networkApi: NetworkApi, placesDao: PlacesDao
+    ) = PlacesRepository(networkApi, placesDao)
 }
