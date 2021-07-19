@@ -13,4 +13,7 @@ interface PlacesDao {
 
     @Query("SELECT * FROM Places")
     suspend fun getPlaces(): List<CachedPlace>
+
+    @Query("SELECT * FROM Places WHERE isFavorite = 1")
+    suspend fun getFavorites(): List<CachedPlace>
 }

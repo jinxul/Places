@@ -19,8 +19,9 @@ class PlacesRepository @Inject constructor(
 
     suspend fun getCachedPlaces(): List<CachedPlace> = placesDao.getPlaces()
 
+    suspend fun getFavoritePlaces(): List<CachedPlace> = placesDao.getFavorites()
+
     suspend fun insertCachedPlaces(data: List<CachedPlace>) {
         placesDao.insert(data)
     }
-
 }
