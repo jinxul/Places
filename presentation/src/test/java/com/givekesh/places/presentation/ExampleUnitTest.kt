@@ -1,4 +1,4 @@
-package com.givekesh.places
+package com.givekesh.places.presentation
 
 import org.junit.Test
 
