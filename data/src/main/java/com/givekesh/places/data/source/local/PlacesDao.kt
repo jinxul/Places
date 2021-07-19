@@ -11,9 +11,9 @@ interface PlacesDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(data: List<CachedPlace>)
 
-    @Query("SELECT * FROM Places")
-    suspend fun getPlaces(): List<CachedPlace>
+    @Query("SELECT * FROM Places WHERE title LIKE '%' || :searchQuery || '%'")
+    suspend fun getPlaces(searchQuery: String): List<CachedPlace>
 
-    @Query("SELECT * FROM Places WHERE isFavorite = 1")
-    suspend fun getFavorites(): List<CachedPlace>
+    @Query("SELECT * FROM Places WHERE isFavorite = 1 AND title LIKE '%' || :searchQuery || '%'")
+    suspend fun getFavorites(searchQuery: String): List<CachedPlace>
 }

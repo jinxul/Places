@@ -5,6 +5,7 @@ import com.givekesh.places.domain.mapper.CachedPlaceMapper
 import com.givekesh.places.domain.mapper.PlaceMapper
 import com.givekesh.places.domain.usecase.FavoritesUseCase
 import com.givekesh.places.domain.usecase.PlacesUseCase
+import com.givekesh.places.domain.usecase.SearchUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -28,4 +29,11 @@ object UseCaseModule {
         placesRepository: PlacesRepository,
         mapper: PlaceMapper
     ) = FavoritesUseCase(placesRepository, mapper)
+
+    @Singleton
+    @Provides
+    fun provideSearchUseCase(
+        placesRepository: PlacesRepository,
+        mapper: PlaceMapper
+    ) = SearchUseCase(placesRepository, mapper)
 }

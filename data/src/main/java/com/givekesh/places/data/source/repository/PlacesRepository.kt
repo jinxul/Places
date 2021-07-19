@@ -17,9 +17,11 @@ class PlacesRepository @Inject constructor(
 
     suspend fun getFavorites(): FavoriteResponse = networkApi.getFavorites()
 
-    suspend fun getCachedPlaces(): List<CachedPlace> = placesDao.getPlaces()
+    suspend fun getCachedPlaces(searchQuery: String = ""): List<CachedPlace> =
+        placesDao.getPlaces("")
 
-    suspend fun getFavoritePlaces(): List<CachedPlace> = placesDao.getFavorites()
+    suspend fun getFavoritePlaces(searchQuery: String = ""): List<CachedPlace> =
+        placesDao.getFavorites("")
 
     suspend fun insertCachedPlaces(data: List<CachedPlace>) {
         placesDao.insert(data)
