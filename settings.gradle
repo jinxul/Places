@@ -17,6 +17,7 @@ pluginManagement {
         id 'com.android.library' version versions.AGP
         id 'org.jetbrains.kotlin.android' version versions.kotlin
         id 'org.jetbrains.kotlin.kapt' version versions.kotlin
+        id "org.jetbrains.kotlin.plugin.parcelize" version versions.kotlin
     }
 }
 dependencyResolutionManagement {
