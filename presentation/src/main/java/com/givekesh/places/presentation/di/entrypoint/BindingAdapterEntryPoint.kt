@@ -11,5 +11,5 @@ import dagger.hilt.InstallIn
 @BindingAdapterScope
 @InstallIn(BindingAdapterComponent::class)
 interface BindingAdapterEntryPoint : DataBindingComponent {
-    fun getBindingAdapter(): BindingAdapter
+    override fun getBindingAdapter(): BindingAdapter
 }
