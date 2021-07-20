@@ -10,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import com.givekesh.places.databinding.FragmentPlacesBinding
 import com.givekesh.places.domain.util.DataState
 import com.givekesh.places.domain.util.PlacesIntent
+import com.givekesh.places.presentation.util.GridItemDecoration
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
@@ -44,7 +45,11 @@ class PlacesFragment : Fragment() {
 
     private fun setupPlacesList() {
         adapter = PlacesAdapter()
-        binding.placesList.adapter = adapter
+        val itemDecoration = GridItemDecoration()
+        binding.apply {
+            placesList.adapter = adapter
+            placesList.addItemDecoration(itemDecoration)
+        }
     }
 
     private fun requestData() {
