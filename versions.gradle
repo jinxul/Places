@@ -26,6 +26,7 @@ versions.room = "2.3.0"
 versions.lifecycle = "2.2.0"
 versions.glide = "4.12.0"
 versions.navigation = "2.3.5"
+versions.retrofit_bom = '5.0.0-alpha.2'
 ext.versions = versions
 
 def deps = [:]
@@ -53,6 +54,9 @@ deps.hilt = hilt
 def retrofit = [:]
 retrofit.runtime = "com.squareup.retrofit2:retrofit:$versions.retrofit"
 retrofit.gson = "com.squareup.retrofit2:converter-gson:$versions.retrofit"
+retrofit.bom = "com.squareup.okhttp3:okhttp-bom:$versions.retrofit_bom"
+retrofit.okhttp = "com.squareup.okhttp3:okhttp"
+retrofit.interceptor = "com.squareup.okhttp3:logging-interceptor"
 deps.retrofit = retrofit
 
 def coroutines = [:]

@@ -38,6 +38,9 @@ dependencies {
 
     implementation deps.retrofit.runtime
     implementation deps.retrofit.gson
+    implementation(platform(deps.retrofit.bom))
+    implementation deps.retrofit.okhttp
+    implementation deps.retrofit.interceptor
 
     implementation deps.room.runtime
     implementation deps.room.ktx
