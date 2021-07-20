@@ -47,6 +47,7 @@ dependencies {
     implementation deps.androidx.appcompat
     implementation deps.androidx.constraintlayout
     implementation deps.androidx.lifecycle
+
     implementation deps.hilt.android
     kapt deps.hilt.compiler
 
@@ -55,6 +56,10 @@ dependencies {
 
     implementation deps.navigation.core
     implementation deps.navigation.ui
+
+    implementation deps.glide.core
+    kapt deps.glide.compiler
+
     implementation project(':domain')
     testImplementation deps.tests.junit
     androidTestImplementation deps.tests.extJunit
