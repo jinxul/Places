@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'org.jetbrains.kotlin.kapt'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -44,6 +45,8 @@ dependencies {
     implementation deps.androidx.core
     implementation deps.androidx.appcompat
     implementation deps.androidx.constraintlayout
+    implementation deps.hilt.android
+    kapt deps.hilt.compiler
 
     testImplementation deps.tests.junit
     androidTestImplementation deps.tests.extJunit
