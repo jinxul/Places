@@ -2,17 +2,18 @@ package com.givekesh.places.presentation.places
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.givekesh.places.BR
 import com.givekesh.places.databinding.ItemPlaceBinding
 import com.givekesh.places.domain.entity.Place
+import com.givekesh.places.presentation.util.ItemFavoriteCallback
 import com.givekesh.places.presentation.util.PlacesDiffUtil
 
-class PlacesAdapter : RecyclerView.Adapter<PlacesViewHolder>() {
+class PlacesAdapter : RecyclerView.Adapter<PlacesAdapter.PlacesViewHolder>() {
 
     private val items = mutableListOf<Place>()
+    private lateinit var listener: ItemFavoriteCallback
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlacesViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -36,13 +37,22 @@ class PlacesAdapter : RecyclerView.Adapter<PlacesViewHolder>() {
         items.addAll(data)
         diffResult.dispatchUpdatesTo(this)
     }
-}
 
-class PlacesViewHolder(
-    private val binding: ViewDataBinding
-) : RecyclerView.ViewHolder(binding.root) {
+    fun setOnFavoriteClickListener(listener: ItemFavoriteCallback) {
+        this.listener = listener
+    }
 
-    fun bind(place: Place) {
-        binding.setVariable(BR.place, place)
+    inner class PlacesViewHolder(
+        private val binding: ItemPlaceBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(place: Place) {
+            binding.apply {
+                setVariable(BR.place, place)
+                itemFavoriteIndicator.setOnClickListener {
+                    listener.onFavoritesChanged(place.id, !place.isFavorite)
+                }
+            }
+        }
     }
 }

@@ -45,6 +45,9 @@ class PlacesFragment : Fragment() {
 
     private fun setupPlacesList() {
         adapter = PlacesAdapter()
+        adapter.setOnFavoriteClickListener { id, isFavorite ->
+            sendIntent(PlacesIntent.SetFavorites(id, isFavorite))
+        }
         val itemDecoration = GridItemDecoration()
         binding.apply {
             placesList.adapter = adapter
@@ -53,8 +56,12 @@ class PlacesFragment : Fragment() {
     }
 
     private fun requestData() {
+        sendIntent(PlacesIntent.GetPlaces)
+    }
+
+    private fun sendIntent(placesIntent: PlacesIntent) {
         lifecycleScope.launch {
-            viewModel.channel.send(PlacesIntent.GetPlaces)
+            viewModel.channel.send(placesIntent)
         }
     }
 

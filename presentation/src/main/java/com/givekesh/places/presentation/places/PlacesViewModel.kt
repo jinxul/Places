@@ -38,9 +38,16 @@ class PlacesViewModel @Inject constructor(
                     PlacesIntent.GetPlaces -> placesUseCase()
                         .onEach { _dataState.value = it }
                         .launchIn(viewModelScope)
-                    PlacesIntent.GetFavorites -> favoritesUseCase()
+                    PlacesIntent.GetFavorites -> favoritesUseCase.getFavoritePlaces()
                         .onEach { _dataState.value = it }
                         .launchIn(viewModelScope)
+                    is PlacesIntent.SetFavorites -> {
+                        favoritesUseCase.setFavoritePlaces(
+                            id = placesIntent.id,
+                            isFavorite = placesIntent.isFavorite
+                        )
+                        channel.send(PlacesIntent.GetFavorites)
+                    }
                     is PlacesIntent.SearchPlaces -> searchUseCase(
                         searchQuery = placesIntent.searchQuery,
                         filterByFavorites = placesIntent.filterByFavorites

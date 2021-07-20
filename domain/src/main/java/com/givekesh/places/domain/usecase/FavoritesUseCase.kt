@@ -12,7 +12,7 @@ class FavoritesUseCase @Inject constructor(
     private val placesRepository: PlacesRepository,
     private val mapper: PlaceMapper
 ) {
-    suspend operator fun invoke(): Flow<DataState<List<Place>>> = flow {
+    suspend fun getFavoritePlaces(): Flow<DataState<List<Place>>> = flow {
         emit(DataState.Loading)
         try {
             val data = placesRepository.getFavoritePlaces()
@@ -21,5 +21,9 @@ class FavoritesUseCase @Inject constructor(
         } catch (exception: Exception) {
             emit(DataState.Failed(exception))
         }
+    }
+
+    suspend fun setFavoritePlaces(id: Int, isFavorite: Boolean) {
+        placesRepository.setFavoritePlaces(id, isFavorite)
     }
 }
