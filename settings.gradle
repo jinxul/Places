@@ -9,6 +9,8 @@ pluginManagement {
         eachPlugin {
             if (requested.id.id == 'dagger.hilt.android.plugin') {
                 useModule(deps.hilt.plugin)
+            } else if (requested.id.id == 'androidx.navigation.safeargs.kotlin'){
+                useModule(deps.navigation.safeArgs)
             }
         }
     }
@@ -17,7 +19,7 @@ pluginManagement {
         id 'com.android.library' version versions.AGP
         id 'org.jetbrains.kotlin.android' version versions.kotlin
         id 'org.jetbrains.kotlin.kapt' version versions.kotlin
-        id "org.jetbrains.kotlin.plugin.parcelize" version versions.kotlin
+        id 'org.jetbrains.kotlin.plugin.parcelize' version versions.kotlin
     }
 }
 dependencyResolutionManagement {

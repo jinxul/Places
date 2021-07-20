@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_graph"
+    app:startDestination="@id/fragment_places">
+
+    <fragment
+        android:id="@+id/fragment_places"
+        android:name="com.givekesh.places.presentation.places.PlacesFragment"
+        tools:layout="@layout/fragment_places">
+        <action
+            android:id="@+id/action_places_to_details"
+            app:destination="@id/fragment_details"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_details"
+        android:name="com.givekesh.places.presentation.details.DetailsFragment"
+        tools:layout="@layout/fragment_details">
+        <argument
+            android:name="place"
+            app:argType="com.givekesh.places.domain.entity.Place"
+            app:nullable="false" />
+    </fragment>
+</navigation>

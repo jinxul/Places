@@ -23,6 +23,7 @@ versions.hilt = "2.37"
 versions.retrofit = "2.9.0"
 versions.coroutines = "1.5.1"
 versions.room = "2.3.0"
+versions.navigation = "2.3.5"
 ext.versions = versions
 
 def deps = [:]
@@ -61,5 +62,11 @@ room.runtime = "androidx.room:room-runtime:$versions.room"
 room.ktx = "androidx.room:room-ktx:$versions.room"
 room.compiler = "androidx.room:room-compiler:$versions.room"
 deps.room = room
+
+def navigation = [:]
+navigation.core = "androidx.navigation:navigation-fragment-ktx:$versions.navigation"
+navigation.ui = "androidx.navigation:navigation-ui-ktx:$versions.navigation"
+navigation.safeArgs = "androidx.navigation:navigation-safe-args-gradle-plugin:$versions.navigation"
+deps.navigation = navigation
 
 ext.deps = deps

@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'org.jetbrains.kotlin.kapt'
     id 'dagger.hilt.android.plugin'
+    id "androidx.navigation.safeargs.kotlin"
 }
 
 android {
@@ -48,6 +49,8 @@ dependencies {
     implementation deps.hilt.android
     kapt deps.hilt.compiler
 
+    implementation deps.navigation.core
+    implementation deps.navigation.ui
     testImplementation deps.tests.junit
     androidTestImplementation deps.tests.extJunit
     androidTestImplementation deps.tests.espresso
