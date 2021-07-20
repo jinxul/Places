@@ -23,6 +23,7 @@ versions.hilt = "2.37"
 versions.retrofit = "2.9.0"
 versions.coroutines = "1.5.1"
 versions.room = "2.3.0"
+versions.lifecycle = "2.2.0"
 versions.navigation = "2.3.5"
 ext.versions = versions
 
@@ -33,6 +34,7 @@ def androidx = [:]
 androidx.core = "androidx.core:core-ktx:$versions.core"
 androidx.appcompat = "androidx.appcompat:appcompat:$versions.appcompat"
 androidx.constraintlayout = "androidx.constraintlayout:constraintlayout:$versions.constraintlayout"
+androidx.lifecycle = "androidx.lifecycle:lifecycle-extensions:$versions.lifecycle"
 deps.androidx = androidx
 
 def tests = [:]

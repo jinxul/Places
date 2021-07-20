@@ -46,11 +46,16 @@ dependencies {
     implementation deps.androidx.core
     implementation deps.androidx.appcompat
     implementation deps.androidx.constraintlayout
+    implementation deps.androidx.lifecycle
     implementation deps.hilt.android
     kapt deps.hilt.compiler
 
+    implementation deps.coroutines.android
+    implementation deps.coroutines.core
+
     implementation deps.navigation.core
     implementation deps.navigation.ui
+    implementation project(':domain')
     testImplementation deps.tests.junit
     androidTestImplementation deps.tests.extJunit
     androidTestImplementation deps.tests.espresso
