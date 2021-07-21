@@ -39,6 +39,7 @@ class PlacesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupPlacesList()
+        setupToolbar()
         requestData()
         subscribeObserver()
     }
@@ -47,11 +48,26 @@ class PlacesFragment : Fragment() {
         adapter = PlacesAdapter()
         adapter.setOnFavoriteClickListener { id, isFavorite ->
             sendIntent(PlacesIntent.SetFavorites(id, isFavorite))
+            requestFilteredData(binding.filter.isChecked)
         }
         val itemDecoration = GridItemDecoration()
         binding.apply {
             placesList.adapter = adapter
             placesList.addItemDecoration(itemDecoration)
+        }
+    }
+
+    private fun setupToolbar() {
+        binding.filter.setOnCheckedChangeListener { _, isChecked ->
+            requestFilteredData(isChecked)
+        }
+    }
+
+    private fun requestFilteredData(isFiltered: Boolean) {
+        if (isFiltered) {
+            sendIntent(PlacesIntent.GetFavorites)
+        } else {
+            sendIntent(PlacesIntent.GetPlaces)
         }
     }
 

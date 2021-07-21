@@ -54,14 +54,12 @@
 
         <androidx.appcompat.widget.AppCompatToggleButton
             android:id="@+id/item_favorite_indicator"
+            style="@style/toggleButton"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginStart="8dp"
             android:background="@drawable/favorites_selector"
             android:checked="@{place.favorite}"
-            android:text="@null"
-            android:textOff="@null"
-            android:textOn="@null"
             app:layout_constraintBottom_toBottomOf="@id/item_short_address"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/item_short_address" />

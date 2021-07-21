@@ -46,7 +46,6 @@ class PlacesViewModel @Inject constructor(
                             id = placesIntent.id,
                             isFavorite = placesIntent.isFavorite
                         )
-                        channel.send(PlacesIntent.GetFavorites)
                     }
                     is PlacesIntent.SearchPlaces -> searchUseCase(
                         searchQuery = placesIntent.searchQuery,
