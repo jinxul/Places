@@ -1,9 +1,11 @@
 package com.givekesh.places.presentation.places
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -77,7 +79,10 @@ class PlacesFragment : Fragment() {
                     searchBar.setStartIconOnClickListener { }
                 } else {
                     searchBar.setStartIconDrawable(R.drawable.ic_baseline_close)
-                    searchBar.setStartIconOnClickListener { search.setText("") }
+                    searchBar.setStartIconOnClickListener {
+                        search.setText("")
+                        hideKeyboard()
+                    }
                 }
             }
         }
@@ -93,6 +98,16 @@ class PlacesFragment : Fragment() {
 
     private fun requestData() {
         sendIntent(PlacesIntent.GetPlaces)
+    }
+
+    private fun hideKeyboard() {
+        val inputManager = requireContext().getSystemService(
+            Context.INPUT_METHOD_SERVICE
+        ) as InputMethodManager
+        inputManager.hideSoftInputFromWindow(
+            binding.search.windowToken,
+            InputMethodManager.HIDE_NOT_ALWAYS
+        )
     }
 
     private fun sendIntent(placesIntent: PlacesIntent) {
