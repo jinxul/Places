@@ -7,8 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.core.widget.addTextChangedListener
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.givekesh.places.R
@@ -16,6 +14,7 @@ import com.givekesh.places.databinding.FragmentPlacesBinding
 import com.givekesh.places.domain.entity.Place
 import com.givekesh.places.domain.util.DataState
 import com.givekesh.places.domain.util.PlacesIntent
+import com.givekesh.places.presentation.base.BaseFragment
 import com.givekesh.places.presentation.util.GridItemDecoration
 import com.givekesh.places.presentation.util.ItemCallback
 import dagger.hilt.android.AndroidEntryPoint
@@ -24,11 +23,9 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class PlacesFragment : Fragment() {
+class PlacesFragment : BaseFragment() {
     private var _binding: FragmentPlacesBinding? = null
     private val binding get() = _binding!!
-
-    private val viewModel: PlacesViewModel by activityViewModels()
 
     private lateinit var adapter: PlacesAdapter
     private var uiJob: Job? = null
@@ -102,14 +99,6 @@ class PlacesFragment : Fragment() {
         }
     }
 
-    private fun requestFilteredData(isFiltered: Boolean) {
-        if (isFiltered) {
-            sendIntent(PlacesIntent.GetFavorites)
-        } else {
-            sendIntent(PlacesIntent.GetPlaces)
-        }
-    }
-
     private fun requestData() {
         sendIntent(PlacesIntent.GetPlaces)
     }
@@ -122,12 +111,6 @@ class PlacesFragment : Fragment() {
             binding.search.windowToken,
             InputMethodManager.HIDE_NOT_ALWAYS
         )
-    }
-
-    private fun sendIntent(placesIntent: PlacesIntent) {
-        lifecycleScope.launch {
-            viewModel.channel.send(placesIntent)
-        }
     }
 
     private fun subscribeObserver() {

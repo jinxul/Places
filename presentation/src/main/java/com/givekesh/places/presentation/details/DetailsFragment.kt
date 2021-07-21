@@ -4,24 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.givekesh.places.BR
 import com.givekesh.places.databinding.FragmentDetailsBinding
 import com.givekesh.places.domain.util.PlacesIntent
-import com.givekesh.places.presentation.places.PlacesViewModel
+import com.givekesh.places.presentation.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class DetailsFragment : Fragment() {
+class DetailsFragment : BaseFragment() {
     private var _binding: FragmentDetailsBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: PlacesViewModel by activityViewModels()
     private val args: DetailsFragmentArgs by navArgs()
 
     override fun onCreateView(
@@ -49,20 +44,6 @@ class DetailsFragment : Fragment() {
                 )
                 requestFilteredData(args.isFiltered)
             }
-        }
-    }
-
-    private fun requestFilteredData(isFiltered: Boolean) {
-        if (isFiltered) {
-            sendIntent(PlacesIntent.GetFavorites)
-        } else {
-            sendIntent(PlacesIntent.GetPlaces)
-        }
-    }
-
-    private fun sendIntent(placesIntent: PlacesIntent) {
-        lifecycleScope.launch {
-            viewModel.channel.send(placesIntent)
         }
     }
 
