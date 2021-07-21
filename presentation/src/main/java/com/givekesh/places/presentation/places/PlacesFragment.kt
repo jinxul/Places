@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -62,6 +63,14 @@ class PlacesFragment : Fragment() {
             filter.setOnCheckedChangeListener { _, isChecked ->
                 requestFilteredData(isChecked)
                 placesList.smoothScrollToPosition(0)
+            }
+            search.addTextChangedListener {
+                sendIntent(
+                    PlacesIntent.SearchPlaces(
+                        searchQuery = it.toString(),
+                        filterByFavorites = filter.isChecked
+                    )
+                )
             }
         }
     }
