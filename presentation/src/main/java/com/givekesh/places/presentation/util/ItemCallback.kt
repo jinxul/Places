@@ -1,5 +1,8 @@
 package com.givekesh.places.presentation.util
 
-fun interface ItemFavoriteCallback {
+import com.givekesh.places.domain.entity.Place
+
+interface ItemCallback {
     fun onFavoritesChanged(id: Int, isFavorite: Boolean)
+    fun onClickListener(place: Place)
 }

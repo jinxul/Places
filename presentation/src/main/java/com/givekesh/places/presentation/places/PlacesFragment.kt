@@ -10,11 +10,14 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.givekesh.places.R
 import com.givekesh.places.databinding.FragmentPlacesBinding
+import com.givekesh.places.domain.entity.Place
 import com.givekesh.places.domain.util.DataState
 import com.givekesh.places.domain.util.PlacesIntent
 import com.givekesh.places.presentation.util.GridItemDecoration
+import com.givekesh.places.presentation.util.ItemCallback
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
@@ -50,10 +53,18 @@ class PlacesFragment : Fragment() {
 
     private fun setupPlacesList() {
         adapter = PlacesAdapter()
-        adapter.setOnFavoriteClickListener { id, isFavorite ->
-            sendIntent(PlacesIntent.SetFavorites(id, isFavorite))
-            requestFilteredData(binding.filter.isChecked)
-        }
+        adapter.setOnItemCallback(object : ItemCallback {
+            override fun onFavoritesChanged(id: Int, isFavorite: Boolean) {
+                sendIntent(PlacesIntent.SetFavorites(id, isFavorite))
+                requestFilteredData(binding.filter.isChecked)
+            }
+
+            override fun onClickListener(place: Place) {
+                findNavController().navigate(
+                    PlacesFragmentDirections.actionPlacesToDetails(place)
+                )
+            }
+        })
         val itemDecoration = GridItemDecoration()
         binding.apply {
             placesList.adapter = adapter
