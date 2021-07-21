@@ -1,9 +1,9 @@
 package com.givekesh.places.presentation.util
 
+import android.content.Context
 import android.graphics.Rect
 import android.util.TypedValue
 import android.view.View
-import androidx.core.view.marginTop
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 
@@ -14,17 +14,21 @@ class GridItemDecoration : RecyclerView.ItemDecoration() {
         parent: RecyclerView,
         state: RecyclerView.State
     ) {
-        if (state.itemCount >= 4) {
-            val marginTop = when (parent.getChildLayoutPosition(view)) {
-                0 -> TypedValue.applyDimension(
-                    TypedValue.COMPLEX_UNIT_DIP,
-                    56F,
-                    view.context.resources.displayMetrics
-                ).toInt()
-                else -> view.marginTop
+        parent.adapter?.let { adapter ->
+            if (adapter.itemCount >= 4) {
+                val marginTop = when (parent.getChildLayoutPosition(view)) {
+                    0 -> getPixelSize(56F, view.context)
+                    else -> getPixelSize(8F, view.context)
+                }
+                (view.layoutParams as StaggeredGridLayoutManager.LayoutParams)
+                    .topMargin = marginTop
             }
-            (view.layoutParams as StaggeredGridLayoutManager.LayoutParams)
-                .topMargin = marginTop
         }
     }
+
+    private fun getPixelSize(dp: Float, context: Context): Int = TypedValue.applyDimension(
+        TypedValue.COMPLEX_UNIT_DIP,
+        dp,
+        context.resources.displayMetrics
+    ).toInt()
 }
