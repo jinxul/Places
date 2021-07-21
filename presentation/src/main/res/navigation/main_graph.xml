@@ -26,5 +26,9 @@
             android:name="place"
             app:argType="com.givekesh.places.domain.entity.Place"
             app:nullable="false" />
+        <argument
+            android:name="isFiltered"
+            app:argType="boolean"
+            app:nullable="false" />
     </fragment>
 </navigation>

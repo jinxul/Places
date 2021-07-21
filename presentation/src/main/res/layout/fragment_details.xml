@@ -100,6 +100,26 @@
                     app:layout_constraintTop_toBottomOf="@id/place_title"
                     app:setUnicodeText="@{place.shortAddress}" />
 
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_view"
+                    android:padding="8dp"
+                    app:layout_constraintBottom_toBottomOf="@id/place_short_address"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/place_title">
+
+                    <androidx.appcompat.widget.AppCompatToggleButton
+                        style="@style/toggleButton"
+                        android:id="@+id/favorite"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:background="@drawable/favorites_selector"
+                        android:checked="@{place.favorite}"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/place_description_label"
                     android:layout_width="match_parent"

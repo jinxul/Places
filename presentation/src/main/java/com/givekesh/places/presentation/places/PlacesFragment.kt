@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.givekesh.places.R
@@ -28,7 +28,7 @@ class PlacesFragment : Fragment() {
     private var _binding: FragmentPlacesBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: PlacesViewModel by viewModels()
+    private val viewModel: PlacesViewModel by activityViewModels()
 
     private lateinit var adapter: PlacesAdapter
     private var uiJob: Job? = null
@@ -52,21 +52,24 @@ class PlacesFragment : Fragment() {
     }
 
     private fun setupPlacesList() {
-        adapter = PlacesAdapter()
-        adapter.setOnItemCallback(object : ItemCallback {
-            override fun onFavoritesChanged(id: Int, isFavorite: Boolean) {
-                sendIntent(PlacesIntent.SetFavorites(id, isFavorite))
-                requestFilteredData(binding.filter.isChecked)
-            }
-
-            override fun onClickListener(place: Place) {
-                findNavController().navigate(
-                    PlacesFragmentDirections.actionPlacesToDetails(place)
-                )
-            }
-        })
-        val itemDecoration = GridItemDecoration()
         binding.apply {
+            adapter = PlacesAdapter()
+            adapter.setOnItemCallback(object : ItemCallback {
+                override fun onFavoritesChanged(id: Int, isFavorite: Boolean) {
+                    sendIntent(PlacesIntent.SetFavorites(id, isFavorite))
+                    requestFilteredData(filter.isChecked)
+                }
+
+                override fun onClickListener(place: Place) {
+                    findNavController().navigate(
+                        PlacesFragmentDirections.actionPlacesToDetails(
+                            place = place,
+                            isFiltered = filter.isChecked
+                        )
+                    )
+                }
+            })
+            val itemDecoration = GridItemDecoration()
             placesList.adapter = adapter
             placesList.addItemDecoration(itemDecoration)
         }
