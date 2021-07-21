@@ -8,6 +8,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.givekesh.places.R
 import com.givekesh.places.databinding.FragmentPlacesBinding
 import com.givekesh.places.domain.util.DataState
 import com.givekesh.places.domain.util.PlacesIntent
@@ -71,6 +72,13 @@ class PlacesFragment : Fragment() {
                         filterByFavorites = filter.isChecked
                     )
                 )
+                if (it.isNullOrEmpty()) {
+                    searchBar.setStartIconDrawable(R.drawable.ic_baseline_search)
+                    searchBar.setStartIconOnClickListener { }
+                } else {
+                    searchBar.setStartIconDrawable(R.drawable.ic_baseline_close)
+                    searchBar.setStartIconOnClickListener { search.setText("") }
+                }
             }
         }
     }
