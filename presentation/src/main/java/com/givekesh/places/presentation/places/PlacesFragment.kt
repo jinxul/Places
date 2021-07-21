@@ -58,8 +58,11 @@ class PlacesFragment : Fragment() {
     }
 
     private fun setupToolbar() {
-        binding.filter.setOnCheckedChangeListener { _, isChecked ->
-            requestFilteredData(isChecked)
+        binding.apply {
+            filter.setOnCheckedChangeListener { _, isChecked ->
+                requestFilteredData(isChecked)
+                placesList.smoothScrollToPosition(0)
+            }
         }
     }
 
