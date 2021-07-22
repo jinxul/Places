@@ -10,4 +10,10 @@
 
     <color name="item_background">#292929</color>
     <color name="hint_color">#525252</color>
+
+    <color name="ratingVeryPoor">#E52E30</color>
+    <color name="ratingPoor">#EF7E30</color>
+    <color name="ratingFair">#FFD334</color>
+    <color name="ratingNormal">#81C02B</color>
+    <color name="ratingGood">#01AD23</color>
 </resources>
