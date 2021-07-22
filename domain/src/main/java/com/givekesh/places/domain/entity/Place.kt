@@ -15,29 +15,23 @@ data class Place(
     val isPromoted: Boolean,
     var isFavorite: Boolean
 ) : Parcelable {
-    override fun equals(other: Any?): Boolean {
-        if (other !is Place)
-            return false
-        return (id == other.id &&
-                title == other.title &&
-                shortAddress == other.shortAddress &&
-                iconUrl == other.iconUrl &&
-                bannerUrl == other.bannerUrl &&
-                description == other.description &&
-                score == other.score
-                )
-    }
+    override fun equals(other: Any?): Boolean = other is Place &&
+            id == other.id &&
+            title == other.title &&
+            shortAddress == other.shortAddress &&
+            iconUrl == other.iconUrl &&
+            bannerUrl == other.bannerUrl &&
+            description == other.description &&
+            score == other.score
 
     override fun hashCode(): Int {
         var result = id
-        result = 31 * result + title.hashCode()
-        result = 31 * result + shortAddress.hashCode()
-        result = 31 * result + iconUrl.hashCode()
-        result = 31 * result + bannerUrl.hashCode()
-        result = 31 * result + description.hashCode()
-        result = 31 * result + score.hashCode()
-        result = 31 * result + isPromoted.hashCode()
-        result = 31 * result + isFavorite.hashCode()
+        result *= 31 + title.hashCode()
+        result *= 31 + shortAddress.hashCode()
+        result *= 31 + iconUrl.hashCode()
+        result *= 31 + bannerUrl.hashCode()
+        result *= 31 + description.hashCode()
+        result *= 31 + score.hashCode()
         return result
     }
 }
