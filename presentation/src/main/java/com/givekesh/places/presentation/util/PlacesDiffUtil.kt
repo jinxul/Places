@@ -20,5 +20,5 @@ class PlacesDiffUtil(
     override fun areContentsTheSame(
         oldItemPosition: Int,
         newItemPosition: Int
-    ): Boolean = oldList == newList
+    ): Boolean = oldList[oldItemPosition] == newList[newItemPosition]
 }
