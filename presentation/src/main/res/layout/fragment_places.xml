@@ -22,7 +22,7 @@
             style="@style/toggleButton"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:background="@drawable/filter_selector"
+            android:background="@drawable/ic_round_dashboard"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>

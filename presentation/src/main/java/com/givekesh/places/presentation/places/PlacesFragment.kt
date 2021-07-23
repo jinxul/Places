@@ -78,6 +78,13 @@ class PlacesFragment : BaseFragment() {
     private fun setupToolbar() {
         binding.apply {
             filter.setOnCheckedChangeListener { _, isChecked ->
+                val res = when (isChecked) {
+                    true -> R.drawable.dashboard_to_bookmark
+                    false -> R.drawable.bookmark_to_dashboard
+                }
+                filter.setBackgroundResource(res)
+                val animatedVectorDrawable = filter.background.current as AnimatedVectorDrawable
+                animatedVectorDrawable.start()
                 requestFilteredData(isChecked)
                 placesList.smoothScrollToPosition(0)
             }
