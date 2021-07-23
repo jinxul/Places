@@ -1,6 +1,7 @@
 package com.givekesh.places.presentation.places
 
 import android.content.Context
+import android.graphics.drawable.AnimatedVectorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -29,6 +30,8 @@ class PlacesFragment : BaseFragment() {
 
     private lateinit var adapter: PlacesAdapter
     private var uiJob: Job? = null
+
+    private var lastSearchState = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -86,16 +89,31 @@ class PlacesFragment : BaseFragment() {
                     )
                 )
                 if (it.isNullOrEmpty()) {
-                    searchBar.setStartIconDrawable(R.drawable.ic_baseline_search)
+                    handleSearchAnimation(false)
                     searchBar.setStartIconOnClickListener { }
                 } else {
-                    searchBar.setStartIconDrawable(R.drawable.ic_baseline_close)
+                    handleSearchAnimation(true)
                     searchBar.setStartIconOnClickListener {
                         search.setText("")
                         hideKeyboard()
                     }
                 }
             }
+        }
+    }
+
+    private fun handleSearchAnimation(isSearching: Boolean) {
+        if (lastSearchState == isSearching)
+            return
+        lastSearchState = isSearching
+        val drawableRes = when (isSearching) {
+            true -> R.drawable.search_to_close
+            false -> R.drawable.close_to_search
+        }
+        binding.apply {
+            searchBar.setStartIconDrawable(drawableRes)
+            val animatedVectorDrawable = searchBar.startIconDrawable as AnimatedVectorDrawable
+            animatedVectorDrawable.start()
         }
     }
 
