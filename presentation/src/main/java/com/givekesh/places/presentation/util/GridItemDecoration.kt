@@ -16,7 +16,7 @@ class GridItemDecoration : RecyclerView.ItemDecoration() {
     ) {
         parent.adapter?.let { adapter ->
             if (adapter.itemCount >= 4) {
-                val marginTop = when (parent.getChildLayoutPosition(view)) {
+                val marginTop = when (parent.getChildAdapterPosition(view)) {
                     0 -> getPixelSize(56F, view.context)
                     else -> getPixelSize(8F, view.context)
                 }
