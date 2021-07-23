@@ -5,6 +5,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
+import com.givekesh.places.R
 import com.givekesh.places.presentation.di.component.BindingAdapterComponent
 import com.givekesh.places.presentation.di.scope.BindingAdapterScope
 import dagger.Module
@@ -25,6 +26,8 @@ object GlideModule {
         strategy: DiskCacheStrategy
     ): Glide.RequestOptionsFactory = Glide.RequestOptionsFactory {
         RequestOptions().diskCacheStrategy(strategy)
+            .placeholder(R.drawable.ic_baseline_image)
+            .error(R.drawable.ic_baseline_broken_image)
     }
 
     @BindingAdapterScope
@@ -40,4 +43,5 @@ object GlideModule {
         requestOptions: RequestOptions
     ): RequestManager = Glide.with(context)
         .applyDefaultRequestOptions(requestOptions)
+    
 }
