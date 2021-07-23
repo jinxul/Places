@@ -118,12 +118,23 @@ class PlacesFragment : BaseFragment() {
             viewModel.dataState.collect { dataState ->
                 when (dataState) {
                     DataState.Idle -> Unit
-                    DataState.Loading -> Unit
-                    is DataState.Success -> adapter.updateList(dataState.data)
+                    DataState.Loading -> handleLoadingAnimation(true)
+                    is DataState.Success -> {
+                        handleLoadingAnimation(false)
+                        adapter.updateList(dataState.data)
+                    }
                     is DataState.Failed -> Unit
                 }
             }
         }
+    }
+
+    private fun handleLoadingAnimation(isLoading: Boolean) {
+        val visibility = when (isLoading) {
+            true -> View.VISIBLE
+            false -> View.GONE
+        }
+        binding.animationView.visibility = visibility
     }
 
     override fun onDestroyView() {

@@ -27,10 +27,12 @@ versions.lifecycle = "2.2.0"
 versions.glide = "4.12.0"
 versions.navigation = "2.3.5"
 versions.retrofit_bom = '5.0.0-alpha.2'
+versions.lottie = '3.7.1'
 ext.versions = versions
 
 def deps = [:]
 deps.material = "com.google.android.material:material:$versions.material"
+deps.lottie =  "com.airbnb.android:lottie:$versions.lottie"
 
 def androidx = [:]
 androidx.core = "androidx.core:core-ktx:$versions.core"

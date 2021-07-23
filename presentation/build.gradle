@@ -61,6 +61,7 @@ dependencies {
     kapt deps.glide.compiler
 
     implementation project(':domain')
+    implementation deps.lottie
     testImplementation deps.tests.junit
     androidTestImplementation deps.tests.extJunit
     androidTestImplementation deps.tests.espresso
