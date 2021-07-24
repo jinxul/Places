@@ -30,6 +30,7 @@ class BindingAdapter @Inject constructor(
                     target: Target<Drawable>?,
                     isFirstResource: Boolean
                 ): Boolean {
+                    view.scaleType = ImageView.ScaleType.CENTER_INSIDE
                     return false
                 }
 
