@@ -159,11 +159,18 @@ class PlacesFragment : BaseFragment() {
     }
 
     private fun handleLoadingAnimation(isLoading: Boolean) {
-        val visibility = when (isLoading) {
+        val animationVisibility = when (isLoading) {
             true -> View.VISIBLE
             false -> View.GONE
         }
-        binding.animationView.visibility = visibility
+        val placesVisibility = when (isLoading) {
+            true -> View.GONE
+            false -> View.VISIBLE
+        }
+        binding.apply {
+            animationView.visibility = animationVisibility
+            placesList.visibility = placesVisibility
+        }
     }
 
     override fun onDestroyView() {
