@@ -57,14 +57,14 @@ class PlacesFragment : BaseFragment() {
             adapter.setOnItemCallback(object : ItemCallback {
                 override fun onFavoritesChanged(id: Int, isFavorite: Boolean) {
                     sendIntent(PlacesIntent.SetFavorites(id, isFavorite))
-                    requestFilteredData(filter.isChecked)
+                    requestFilteredData(toolbar.filter.isChecked)
                 }
 
                 override fun onClickListener(place: Place) {
                     findNavController().navigate(
                         PlacesFragmentDirections.actionPlacesToDetails(
                             place = place,
-                            isFiltered = filter.isChecked
+                            isFiltered = toolbar.filter.isChecked
                         )
                     )
                 }
@@ -76,7 +76,7 @@ class PlacesFragment : BaseFragment() {
     }
 
     private fun setupToolbar() {
-        binding.apply {
+        binding.toolbar.apply {
             filter.setOnCheckedChangeListener { _, isChecked ->
                 val res = when (isChecked) {
                     true -> R.drawable.dashboard_to_bookmark
@@ -86,7 +86,6 @@ class PlacesFragment : BaseFragment() {
                 val animatedVectorDrawable = filter.background.current as AnimatedVectorDrawable
                 animatedVectorDrawable.start()
                 requestFilteredData(isChecked)
-                placesList.smoothScrollToPosition(0)
             }
             search.addTextChangedListener {
                 sendIntent(
@@ -117,7 +116,7 @@ class PlacesFragment : BaseFragment() {
             true -> R.drawable.search_to_close
             false -> R.drawable.close_to_search
         }
-        binding.apply {
+        binding.toolbar.apply {
             searchBar.setStartIconDrawable(drawableRes)
             val animatedVectorDrawable = searchBar.startIconDrawable as AnimatedVectorDrawable
             animatedVectorDrawable.start()
@@ -133,7 +132,7 @@ class PlacesFragment : BaseFragment() {
             Context.INPUT_METHOD_SERVICE
         ) as InputMethodManager
         inputManager.hideSoftInputFromWindow(
-            binding.search.windowToken,
+            binding.toolbar.search.windowToken,
             InputMethodManager.HIDE_NOT_ALWAYS
         )
     }

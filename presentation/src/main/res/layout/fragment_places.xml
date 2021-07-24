@@ -6,60 +6,9 @@
     android:layout_height="match_parent"
     tools:context="com.givekesh.places.presentation.places.PlacesFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/filter_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/circle_view"
-        android:padding="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <androidx.appcompat.widget.AppCompatToggleButton
-            android:id="@+id/filter"
-            style="@style/toggleButton"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:background="@drawable/ic_round_dashboard"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/search_bar"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginEnd="12dp"
-        android:padding="0dp"
-        app:boxStrokeWidth="0dp"
-        app:boxStrokeWidthFocused="0dp"
-        app:hintEnabled="false"
-        app:layout_constraintBottom_toBottomOf="@id/filter_layout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/filter_layout"
-        app:layout_constraintTop_toTopOf="@id/filter_layout"
-        app:startIconDrawable="@drawable/ic_baseline_search"
-        app:startIconTint="@color/white">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/search"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="0dp"
-            android:background="@drawable/rounded_view"
-            android:hint="@string/search"
-            android:inputType="text"
-            android:lines="1"
-            android:maxLines="1"
-            android:padding="0dp"
-            android:textColor="@color/white"
-            android:textColorHint="@color/hint_color"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </com.google.android.material.textfield.TextInputLayout>
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/content_toolbar" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/places_list"
@@ -72,7 +21,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/filter_layout"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:spanCount="2"
         tools:listitem="@layout/item_place" />
 
@@ -88,7 +37,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/filter_layout" />
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/animation_view"
