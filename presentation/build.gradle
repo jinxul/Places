@@ -60,9 +60,17 @@ dependencies {
     implementation deps.glide.core
     kapt deps.glide.compiler
 
-    implementation project(':domain')
     implementation deps.lottie
+    
+    implementation project(':domain')
+
     testImplementation deps.tests.junit
     androidTestImplementation deps.tests.extJunit
     androidTestImplementation deps.tests.espresso
+}
+kapt {
+    correctErrorTypes true
+}
+hilt {
+    enableAggregatingTask true
 }
