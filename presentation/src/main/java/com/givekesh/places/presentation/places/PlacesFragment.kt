@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import androidx.annotation.StringRes
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -149,10 +150,22 @@ class PlacesFragment : BaseFragment() {
                             true -> View.VISIBLE
                             false -> View.GONE
                         }
+                        handlePlaceholder(
+                            stringRes = R.string.data_not_found,
+                            visibility = placeholderVisibility
+                        )
                         adapter.updateList(dataState.data)
-                        binding.placeholderLayout.root.visibility = placeholderVisibility
                     }
-                    is DataState.Failed -> Unit
+                    is DataState.Failed -> {
+                        binding.apply {
+                            animationView.visibility = View.GONE
+                            placesList.visibility = View.GONE
+                            handlePlaceholder(
+                                stringRes = R.string.unexpected_error,
+                                visibility = View.VISIBLE
+                            )
+                        }
+                    }
                 }
             }
         }
@@ -170,6 +183,13 @@ class PlacesFragment : BaseFragment() {
         binding.apply {
             animationView.visibility = animationVisibility
             placesList.visibility = placesVisibility
+        }
+    }
+
+    private fun handlePlaceholder(@StringRes stringRes: Int, visibility: Int) {
+        binding.apply {
+            placeholderLayout.root.visibility = visibility
+            placeholderLayout.placeholderText.text = getString(stringRes)
         }
     }
 
