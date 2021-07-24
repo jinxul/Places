@@ -146,7 +146,12 @@ class PlacesFragment : BaseFragment() {
                     DataState.Loading -> handleLoadingAnimation(true)
                     is DataState.Success -> {
                         handleLoadingAnimation(false)
+                        val placeholderVisibility = when (dataState.data.isEmpty()) {
+                            true -> View.VISIBLE
+                            false -> View.GONE
+                        }
                         adapter.updateList(dataState.data)
+                        binding.placeholderLayout.root.visibility = placeholderVisibility
                     }
                     is DataState.Failed -> Unit
                 }
