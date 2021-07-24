@@ -33,6 +33,8 @@ android {
 }
 
 dependencies {
+    implementation deps.androidx.preference
+
     implementation deps.hilt.android
     kapt deps.hilt.compiler
 
