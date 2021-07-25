@@ -139,7 +139,7 @@ class PlacesFragment : BaseFragment() {
     }
 
     private fun subscribeObserver() {
-        lifecycleScope.launch {
+        uiJob = lifecycleScope.launch {
             viewModel.dataState.collect { dataState ->
                 when (dataState) {
                     DataState.Idle -> Unit
