@@ -33,6 +33,7 @@ class PlacesFragment : BaseFragment() {
     private var uiJob: Job? = null
 
     private var lastSearchState = false
+    private var isBackgroundSync = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -57,6 +58,7 @@ class PlacesFragment : BaseFragment() {
             adapter = PlacesAdapter()
             adapter.setOnItemCallback(object : ItemCallback {
                 override fun onFavoritesChanged(id: Int, isFavorite: Boolean) {
+                    isBackgroundSync = true
                     sendIntent(PlacesIntent.SetFavorites(id, isFavorite))
                     requestFilteredData(toolbar.filter.isChecked)
                 }
@@ -172,6 +174,10 @@ class PlacesFragment : BaseFragment() {
     }
 
     private fun handleLoadingAnimation(isLoading: Boolean) {
+        if (isBackgroundSync) {
+            isBackgroundSync = false
+            return
+        }
         val animationVisibility = when (isLoading) {
             true -> View.VISIBLE
             false -> View.GONE
