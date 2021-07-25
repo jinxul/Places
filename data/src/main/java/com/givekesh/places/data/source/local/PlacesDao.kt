@@ -5,7 +5,7 @@ import com.givekesh.places.data.model.local.CachedPlace
 
 @Dao
 interface PlacesDao {
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(data: List<CachedPlace>)
 
     @Query("SELECT * FROM Places WHERE title LIKE '%' || :searchQuery || '%' ORDER BY isPromoted DESC")
@@ -20,4 +20,7 @@ interface PlacesDao {
 
     @Query("UPDATE Places SET isFavorite = :favorite WHERE id = :id")
     suspend fun setFavorites(id: Int, favorite: Boolean)
+
+    @Query("SELECT id FROM Places WHERE isFavorite = 1")
+    suspend fun getFavoriteIds(): List<Int>
 }

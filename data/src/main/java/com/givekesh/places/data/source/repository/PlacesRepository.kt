@@ -33,6 +33,8 @@ class PlacesRepository @Inject constructor(
         placesDao.insert(data)
     }
 
+    suspend fun getCachedFavoriteIds(): List<Int> = placesDao.getFavoriteIds()
+
     fun isInitialSetup(): Boolean = preference.getBoolean("isInitialSetup", true)
 
     fun finishInitialSetup() = preference.edit().putBoolean("isInitialSetup", false).commit()

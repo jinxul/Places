@@ -20,7 +20,7 @@ class PlacesUseCase @Inject constructor(
         try {
             val favoritesId = when (placesRepository.isInitialSetup()) {
                 true -> placesRepository.getFavorites().favoriteIds
-                false -> listOf()
+                false -> placesRepository.getCachedFavoriteIds()
             }
             val places = placesRepository.getPlaces().placeResponses
             val promotedPlaces = placesRepository.getPromotedPlaces().placeResponses
