@@ -22,10 +22,10 @@ class PlacesRepository @Inject constructor(
     suspend fun getCachedPlaces(searchQuery: String = ""): List<CachedPlace> =
         placesDao.getPlaces(searchQuery)
 
-    suspend fun getFavoritePlaces(searchQuery: String = ""): List<CachedPlace> =
+    suspend fun getCachedFavoritePlaces(searchQuery: String = ""): List<CachedPlace> =
         placesDao.getFavorites(searchQuery)
 
-    suspend fun setFavoritePlaces(id: Int, isFavorite: Boolean) {
+    suspend fun setCachedFavoritePlaces(id: Int, isFavorite: Boolean) {
         placesDao.setFavorites(id, isFavorite)
     }
 

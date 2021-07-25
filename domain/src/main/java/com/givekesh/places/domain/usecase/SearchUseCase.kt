@@ -17,7 +17,7 @@ class SearchUseCase @Inject constructor(
         filterByFavorites: Boolean
     ): Flow<DataState<List<Place>>> = flow {
         val data = when (filterByFavorites) {
-            true -> placesRepository.getFavoritePlaces(searchQuery)
+            true -> placesRepository.getCachedFavoritePlaces(searchQuery)
             false -> placesRepository.getCachedPlaces(searchQuery)
         }
         val mappedData = mapper.mapToEntityList(data)

@@ -15,7 +15,7 @@ class FavoritesUseCase @Inject constructor(
     suspend fun getFavoritePlaces(): Flow<DataState<List<Place>>> = flow {
         emit(DataState.Loading)
         try {
-            val data = placesRepository.getFavoritePlaces()
+            val data = placesRepository.getCachedFavoritePlaces()
             val mappedData = mapper.mapToEntityList(data)
             emit(DataState.Success(mappedData))
         } catch (exception: Exception) {
@@ -24,6 +24,6 @@ class FavoritesUseCase @Inject constructor(
     }
 
     suspend fun setFavoritePlaces(id: Int, isFavorite: Boolean) {
-        placesRepository.setFavoritePlaces(id, isFavorite)
+        placesRepository.setCachedFavoritePlaces(id, isFavorite)
     }
 }
