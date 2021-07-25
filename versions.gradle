@@ -29,11 +29,13 @@ versions.navigation = "2.3.5"
 versions.retrofit_bom = '5.0.0-alpha.2'
 versions.lottie = '3.7.1'
 versions.preference = "1.1.1"
+versions.leakcanary = "2.7"
 ext.versions = versions
 
 def deps = [:]
 deps.material = "com.google.android.material:material:$versions.material"
 deps.lottie =  "com.airbnb.android:lottie:$versions.lottie"
+deps.leakcanary = "com.squareup.leakcanary:leakcanary-android:$versions.leakcanary"
 
 def androidx = [:]
 androidx.core = "androidx.core:core-ktx:$versions.core"

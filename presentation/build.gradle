@@ -67,6 +67,7 @@ dependencies {
     testImplementation deps.tests.junit
     androidTestImplementation deps.tests.extJunit
     androidTestImplementation deps.tests.espresso
+    debugImplementation deps.leakcanary
 }
 kapt {
     correctErrorTypes true
