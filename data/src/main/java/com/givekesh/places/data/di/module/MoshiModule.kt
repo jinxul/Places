@@ -1,5 +1,6 @@
 package com.givekesh.places.data.di.module
 
+import com.givekesh.places.data.model.remote.PlacesJsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
@@ -14,14 +15,15 @@ import javax.inject.Singleton
 object MoshiModule {
     @Singleton
     @Provides
-    fun provideJsonAdapter(): KotlinJsonAdapterFactory = KotlinJsonAdapterFactory()
+    fun provideKotlinJsonAdapter(): KotlinJsonAdapterFactory = KotlinJsonAdapterFactory()
 
     @Singleton
     @Provides
     fun provideMoshiBuilder(
-        jsonAdapter: KotlinJsonAdapterFactory
+        kotlinJsonAdapter: KotlinJsonAdapterFactory
     ): Moshi = Moshi.Builder()
-        .add(jsonAdapter)
+        .add(PlacesJsonAdapter)
+        .add(kotlinJsonAdapter)
         .build()
 
     @Singleton
