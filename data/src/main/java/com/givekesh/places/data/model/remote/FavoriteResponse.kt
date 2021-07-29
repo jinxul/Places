@@ -1,9 +1,9 @@
 package com.givekesh.places.data.model.remote
 
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
-import com.google.gson.annotations.SerializedName
-
+@JsonClass(generateAdapter = true)
 data class FavoriteResponse(
-    @SerializedName("favoriteIds")
-    val favoriteIds: List<Int>
+    @Json(name = "favoriteIds") val favoriteIds: List<Int>
 )

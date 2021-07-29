@@ -4,6 +4,7 @@ import android.content.SharedPreferences
 import com.givekesh.places.data.model.local.CachedPlace
 import com.givekesh.places.data.model.remote.FavoriteResponse
 import com.givekesh.places.data.model.remote.PlacesResponse
+import com.givekesh.places.data.model.remote.PromotedResponse
 import com.givekesh.places.data.source.local.PlacesDao
 import com.givekesh.places.data.source.remote.NetworkApi
 import javax.inject.Inject
@@ -15,7 +16,7 @@ class PlacesRepository @Inject constructor(
 ) {
     suspend fun getPlaces(): PlacesResponse = networkApi.getPlaces()
 
-    suspend fun getPromotedPlaces(): PlacesResponse = networkApi.getPromotedPlaces()
+    suspend fun getPromotedPlaces(): PromotedResponse = networkApi.getPromotedPlaces()
 
     suspend fun getFavorites(): FavoriteResponse = networkApi.getFavorites()
 

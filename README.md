@@ -29,6 +29,7 @@ You can change the JDK version with the following options:
 - [LeakCanary](https://github.com/square/leakcanary)
 - [OkHttp](https://github.com/square/okhttp)
 - [Retrofit](https://github.com/square/retrofit)
+- [Moshi](https://github.com/square/moshi) 
 - [Lottie](https://github.com/airbnb/lottie-android)
 
 ## Architecture

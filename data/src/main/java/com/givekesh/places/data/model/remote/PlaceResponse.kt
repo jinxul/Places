@@ -1,21 +1,15 @@
 package com.givekesh.places.data.model.remote
 
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
-import com.google.gson.annotations.SerializedName
-
+@JsonClass(generateAdapter = true)
 data class PlaceResponse(
-    @SerializedName("bannerUrl")
-    val bannerUrl: String,
-    @SerializedName("description")
-    val description: String,
-    @SerializedName("iconUrl")
-    val iconUrl: String,
-    @SerializedName("id")
-    val id: Int,
-    @SerializedName("score")
-    val score: Double,
-    @SerializedName("shortAddress")
-    val shortAddress: String,
-    @SerializedName("title")
-    val title: String
+    @Json(name = "bannerUrl") val bannerUrl: String,
+    @Json(name = "description") val description: String,
+    @Json(name = "iconUrl") val iconUrl: String,
+    @Json(name = "id") val id: Int,
+    @Json(name = "score") val score: Double,
+    @Json(name = "shortAddress") val shortAddress: String,
+    @Json(name = "title") val title: String
 )

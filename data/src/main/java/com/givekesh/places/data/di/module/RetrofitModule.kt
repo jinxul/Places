@@ -2,8 +2,8 @@ package com.givekesh.places.data.di.module
 
 import com.givekesh.places.data.source.remote.NetworkApi
 import com.givekesh.places.data.util.Constants
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -11,7 +11,7 @@ import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
 
 @Module
@@ -19,17 +19,8 @@ import javax.inject.Singleton
 object RetrofitModule {
     @Singleton
     @Provides
-    fun provideGsonBuilder(): Gson = GsonBuilder().create()
-
-    @Singleton
-    @Provides
-    fun provideGsonConverter(gson: Gson): GsonConverterFactory = GsonConverterFactory.create(gson)
-
-    @Singleton
-    @Provides
     fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor = HttpLoggingInterceptor()
         .also { it.level = HttpLoggingInterceptor.Level.BODY }
-
 
     @Singleton
     @Provides
@@ -40,7 +31,7 @@ object RetrofitModule {
     @Singleton
     @Provides
     fun provideRetrofit(
-        factory: GsonConverterFactory,
+        factory: MoshiConverterFactory,
         client: OkHttpClient
     ): Retrofit.Builder = Retrofit.Builder()
         .baseUrl(Constants.BASE_URL)

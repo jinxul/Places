@@ -39,10 +39,12 @@ dependencies {
     kapt deps.hilt.compiler
 
     implementation deps.retrofit.runtime
-    implementation deps.retrofit.gson
+    implementation deps.retrofit.moshi
     implementation(platform(deps.retrofit.bom))
     implementation deps.retrofit.okhttp
     implementation deps.retrofit.interceptor
+
+    implementation deps.moshi
 
     implementation deps.room.runtime
     implementation deps.room.ktx

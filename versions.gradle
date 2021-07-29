@@ -10,7 +10,7 @@ buildVersions.versionName = "1.0.0"
 ext.buildVersions = buildVersions
 
 def versions = [:]
-versions.AGP = "7.1.0-alpha04"
+versions.AGP = "7.1.0-alpha05"
 versions.kotlin = "1.5.21"
 versions.material = "1.4.0"
 versions.core = "1.7.0-alpha01"
@@ -30,12 +30,14 @@ versions.retrofit_bom = "5.0.0-alpha.2"
 versions.lottie = "3.7.2"
 versions.preference = "1.1.1"
 versions.leakcanary = "2.7"
+versions.moshi = "1.12.0"
 ext.versions = versions
 
 def deps = [:]
 deps.material = "com.google.android.material:material:$versions.material"
-deps.lottie =  "com.airbnb.android:lottie:$versions.lottie"
+deps.lottie = "com.airbnb.android:lottie:$versions.lottie"
 deps.leakcanary = "com.squareup.leakcanary:leakcanary-android:$versions.leakcanary"
+deps.moshi = "com.squareup.moshi:moshi-kotlin:$versions.moshi"
 
 def androidx = [:]
 androidx.core = "androidx.core:core-ktx:$versions.core"
@@ -59,7 +61,7 @@ deps.hilt = hilt
 
 def retrofit = [:]
 retrofit.runtime = "com.squareup.retrofit2:retrofit:$versions.retrofit"
-retrofit.gson = "com.squareup.retrofit2:converter-gson:$versions.retrofit"
+retrofit.moshi = "com.squareup.retrofit2:converter-moshi:$versions.retrofit"
 retrofit.bom = "com.squareup.okhttp3:okhttp-bom:$versions.retrofit_bom"
 retrofit.okhttp = "com.squareup.okhttp3:okhttp"
 retrofit.interceptor = "com.squareup.okhttp3:logging-interceptor"
