@@ -5,8 +5,8 @@ buildVersions.compileSdk = 30
 buildVersions.buildTools = "31.0.0"
 buildVersions.minSdk = 23
 buildVersions.targetSdk = 30
-buildVersions.versionCode = 100
-buildVersions.versionName = "1.0.0"
+buildVersions.versionCode = 101
+buildVersions.versionName = "1.0.1"
 ext.buildVersions = buildVersions
 
 def versions = [:]
