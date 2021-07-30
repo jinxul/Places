@@ -34,6 +34,7 @@ class PlacesFragment : BaseFragment() {
 
     private var lastSearchState = false
     private var isBackgroundSync = false
+    private var isResume = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -127,7 +128,8 @@ class PlacesFragment : BaseFragment() {
     }
 
     private fun requestData() {
-        sendIntent(PlacesIntent.GetPlaces)
+        if (!isResume)
+            sendIntent(PlacesIntent.GetPlaces)
     }
 
     private fun hideKeyboard() {
@@ -197,6 +199,11 @@ class PlacesFragment : BaseFragment() {
             placeholderLayout.root.visibility = visibility
             placeholderLayout.placeholderText.text = getString(stringRes)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        isResume = true
     }
 
     override fun onDestroyView() {
