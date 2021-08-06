@@ -1,5 +1,6 @@
 package com.givekesh.places.domain.usecase
 
+import android.util.Log
 import com.givekesh.places.data.source.repository.PlacesRepository
 import com.givekesh.places.domain.entity.Place
 import com.givekesh.places.domain.mapper.CachedPlaceMapper
@@ -7,7 +8,6 @@ import com.givekesh.places.domain.mapper.PlaceMapper
 import com.givekesh.places.domain.util.DataState
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import java.net.SocketTimeoutException
 import javax.inject.Inject
 
 class PlacesUseCase @Inject constructor(
@@ -41,14 +41,13 @@ class PlacesUseCase @Inject constructor(
             placesRepository.finishInitialSetup()
             emit(DataState.Success(data))
         } catch (exception: Exception) {
-            when (exception) {
-                is SocketTimeoutException,
-                is java.net.UnknownHostException -> {
-                    val cachedData = placesRepository.getCachedPlaces()
-                    val data = mapper.mapToEntityList(cachedData)
-                    emit(DataState.Success(data))
-                }
-                else -> emit(DataState.Failed(exception))
+            Log.e("PlacesUseCase", "Failed", exception)
+            val cachedData = placesRepository.getCachedPlaces()
+            if (cachedData.isNotEmpty()) {
+                val data = mapper.mapToEntityList(cachedData)
+                emit(DataState.Success(data))
+            } else {
+                emit(DataState.Failed(exception))
             }
         }
     }
