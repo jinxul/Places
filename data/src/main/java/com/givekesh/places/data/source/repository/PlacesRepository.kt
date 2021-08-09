@@ -1,41 +1,27 @@
 package com.givekesh.places.data.source.repository
 
-import android.content.SharedPreferences
 import com.givekesh.places.data.model.local.CachedPlace
 import com.givekesh.places.data.model.remote.FavoriteResponse
 import com.givekesh.places.data.model.remote.PlacesResponse
-import com.givekesh.places.data.source.local.PlacesDao
-import com.givekesh.places.data.source.remote.NetworkApi
-import javax.inject.Inject
 
-class PlacesRepository @Inject constructor(
-    private val networkApi: NetworkApi,
-    private val placesDao: PlacesDao,
-    private val preference: SharedPreferences
-) {
-    suspend fun getPlaces(): PlacesResponse = networkApi.getPlaces()
+interface PlacesRepository {
+    suspend fun getPlaces(): PlacesResponse
 
-    suspend fun getPromotedPlaces(): PlacesResponse = networkApi.getPromotedPlaces()
+    suspend fun getPromotedPlaces(): PlacesResponse
 
-    suspend fun getFavorites(): FavoriteResponse = networkApi.getFavorites()
+    suspend fun getFavorites(): FavoriteResponse
 
-    suspend fun getCachedPlaces(searchQuery: String = ""): List<CachedPlace> =
-        placesDao.getPlaces(searchQuery)
+    suspend fun getCachedPlaces(searchQuery: String = ""): List<CachedPlace>
 
-    suspend fun getCachedFavoritePlaces(searchQuery: String = ""): List<CachedPlace> =
-        placesDao.getFavorites(searchQuery)
+    suspend fun getCachedFavoritePlaces(searchQuery: String = ""): List<CachedPlace>
 
-    suspend fun setCachedFavoritePlaces(id: Int, isFavorite: Boolean) {
-        placesDao.setFavorites(id, isFavorite)
-    }
+    suspend fun setCachedFavoritePlaces(id: Int, isFavorite: Boolean)
 
-    suspend fun insertCachedPlaces(data: List<CachedPlace>) {
-        placesDao.insert(data)
-    }
+    suspend fun insertCachedPlaces(data: List<CachedPlace>)
 
-    suspend fun getCachedFavoriteIds(): List<Int> = placesDao.getFavoriteIds()
+    suspend fun getCachedFavoriteIds(): List<Int>
 
-    fun isInitialSetup(): Boolean = preference.getBoolean("isInitialSetup", true)
+    fun isInitialSetup(): Boolean
 
-    fun finishInitialSetup() = preference.edit().putBoolean("isInitialSetup", false).commit()
+    fun finishInitialSetup()
 }
